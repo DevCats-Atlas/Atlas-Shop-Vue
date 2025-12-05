@@ -1,6 +1,8 @@
 # AtlasShop-Vue
 
-Vue.js frontend package for AtlasShop e-commerce functionality. Provides Vue components, Inertia.js pages, and frontend assets for shop features.
+Vue.js admin panel package for AtlasShop e-commerce functionality. Provides Vue components and Inertia.js pages for the admin interface (orders, baskets management).
+
+**Note:** Frontend demo resources (JavaScript/CSS) are located in the [AtlasShop](../AtlasShop/README.md) package, not in this package.
 
 ## Prerequisites
 
@@ -112,8 +114,8 @@ export default defineConfig(({ mode }) => {
    - npm package in `node_modules`
 
 3. **Config Loading**: AtlasShop-Vue's `vite.config.mjs` file is automatically loaded, which defines:
-   - Resource files (CSS, JS) for shop functionality
-   - Path aliases for imports
+   - Path aliases for admin component imports
+   - (No frontend resources - they're in the AtlasShop package)
 
 4. **Automatic Integration**: All resources and aliases are automatically added to your Vite configuration.
 
@@ -123,21 +125,18 @@ export default defineConfig(({ mode }) => {
 AtlasShop-Vue/
 ├── vite.config.mjs          # Package Vite configuration
 ├── resources/
-│   ├── css/
-│   │   └── shop.css        # Shop styles
-│   ├── js/
-│   │   └── shop.js         # Shop JavaScript
 │   └── admin/
 │       └── Pages/          # Admin pages (orders, baskets, etc.)
 └── package.json
 ```
+
+**Note:** Frontend demo resources (JavaScript/CSS) are in the [AtlasShop](../AtlasShop/README.md) package at `packages/AtlasShop/resources/js/` and `packages/AtlasShop/resources/css/`.
 
 ## Available Aliases
 
 After installation, the following aliases are available in your Vue components:
 
 - `@atlasshop/admin` - Points to `resources/admin` directory
-- `@atlasshop/frontend` - Points to `resources` directory
 
 ### Usage in Components
 
@@ -145,9 +144,7 @@ After installation, the following aliases are available in your Vue components:
 <script setup>
 // Admin pages
 import OrdersIndex from '@atlasshop/admin/Pages/Admin/Orders/Index.vue';
-
-// Frontend components
-import ShopCart from '@atlasshop/frontend/components/Cart.vue';
+import BasketsIndex from '@atlasshop/admin/Pages/Admin/Baskets/Index.vue';
 </script>
 ```
 
@@ -163,25 +160,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
     // Resource files to include in Vite build
-    resources: [
-        { type: 'css', file: 'resources/css/shop.css', context: 'frontend' },
-        { type: 'js', file: 'resources/js/shop.js', context: 'frontend' },
-    ],
+    // (No frontend resources - they're in the AtlasShop package)
+    resources: [],
     
     // Path aliases for this package
     aliases: {
         '@atlasshop/admin': path.resolve(__dirname, 'resources/admin'),
-        '@atlasshop/frontend': path.resolve(__dirname, 'resources'),
     },
 };
 ```
 
+**Note:** Frontend demo resources (JavaScript/CSS) are configured in the [AtlasShop](../AtlasShop/README.md) package, not here.
+
 ## Features
 
 - **E-commerce Admin Pages**: Order management, basket management, and more
-- **Frontend Shop Components**: Shopping cart, checkout, product display
-- **TypeScript Support**: Type-safe shop functionality
 - **Inertia.js Integration**: Seamless integration with Laravel backend
+- **Vue 3 Components**: Modern Vue.js components for admin interface
+
+**Note:** Frontend demo shop functionality (JavaScript library, CSS) is provided by the [AtlasShop](../AtlasShop/README.md) package.
 
 ## Troubleshooting
 
@@ -197,18 +194,18 @@ If you see an error that AtlasShop-Vue is not found:
 
 ### Resources Not Loading
 
-If shop resources aren't loading:
+If admin pages aren't loading:
 
 1. **Check `vite.config.mjs`**: Ensure the package has a valid `vite.config.mjs` file
-2. **Verify file paths**: Check that resource files exist at the specified paths
-3. **Check Vite build**: Run `npm run dev` and check for errors in the console
-4. **Verify AtlasCMS-Vue**: Ensure AtlasCMS-Vue is properly installed and configured
+2. **Check Vite build**: Run `npm run dev` and check for errors in the console
+3. **Verify AtlasCMS-Vue**: Ensure AtlasCMS-Vue is properly installed and configured
+4. **Frontend resources**: If you need frontend shop resources (JS/CSS), they're in the [AtlasShop](../AtlasShop/README.md) package
 
 ### Aliases Not Working
 
 If aliases aren't resolving:
 
-1. **Check import path**: Ensure you're using the correct alias (e.g., `@atlasshop/frontend` not `@/atlasshop`)
+1. **Check import path**: Ensure you're using the correct alias (e.g., `@atlasshop/admin` not `@/atlasshop`)
 2. **Rebuild**: Try running `npm run build` or restarting the dev server
 3. **Check alias definition**: Verify aliases are correctly defined in the package's `vite.config.mjs`
 4. **Verify loadAllPackages**: Ensure `loadAllPackages()` is being called in your root `vite.config.js`

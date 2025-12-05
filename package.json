@@ -4,16 +4,9 @@
     "version": "1.0.0",
     "private": true,
     "type": "module",
-    "description": "AtlasShop Vue components and frontend assets",
+    "description": "AtlasShop Vue admin components (frontend demo resources are in AtlasShop package)",
     "files": [
         "resources/**/*"
-    ],
-    "scripts": {
-        "compile": "npx tsc",
-        "watch": "npx tsc --watch"
-    },
-    "devDependencies": {
-        "typescript": "^5.9.3"
-    }
+    ]
 }
 
