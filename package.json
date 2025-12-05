@@ -1,6 +1,6 @@
 {
     "$schema": "https://www.schemastore.org/package.json",
-    "name": "@devcats/atlas-shop-vue",
+    "name": "@devcats-atlas/atlas-shop-vue",
     "version": "1.0.0",
     "private": true,
     "type": "module",

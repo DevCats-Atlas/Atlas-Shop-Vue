@@ -17,7 +17,7 @@ See [AtlasCMS-Vue README](../AtlasCMS-Vue/README.md) for installation instructio
 ### Option 1: npm Package (Production)
 
 ```bash
-npm install @devcats/atlas-shop-vue
+npm install @devcats-atlas/atlas-shop-vue
 ```
 
 ### Option 2: Local Development
@@ -31,8 +31,8 @@ Or add to your `package.json`:
 ```json
 {
   "dependencies": {
-    "@devcats/atlas-cms-vue": "file:./packages/AtlasCMS-Vue",
-    "@devcats/atlas-shop-vue": "file:./packages/AtlasShop-Vue"
+    "@devcats-atlas/atlas-cms-vue": "file:./packages/AtlasCMS-Vue",
+    "@devcats-atlas/atlas-shop-vue": "file:./packages/AtlasShop-Vue"
   }
 }
 ```
@@ -64,8 +64,8 @@ Make sure both packages are listed in your `package.json` dependencies:
 ```json
 {
   "dependencies": {
-    "@devcats/atlas-cms-vue": "file:./packages/AtlasCMS-Vue",
-    "@devcats/atlas-shop-vue": "file:./packages/AtlasShop-Vue"
+    "@devcats-atlas/atlas-cms-vue": "file:./packages/AtlasCMS-Vue",
+    "@devcats-atlas/atlas-shop-vue": "file:./packages/AtlasShop-Vue"
   }
 }
 ```
@@ -83,7 +83,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 // Import AtlasCMS-Vue utilities (handles all @devcats/*-vue packages)
-const utils = await import('@devcats/atlas-cms-vue/vite-utils.mjs');
+const utils = await import('@devcats-atlas/atlas-cms-vue/vite-utils.mjs');
 const { loadAllPackages } = utils;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -186,7 +186,7 @@ export default {
 
 If you see an error that AtlasShop-Vue is not found:
 
-1. **Check `package.json`**: Ensure `@devcats/atlas-shop-vue` is listed in dependencies
+1. **Check `package.json`**: Ensure `@devcats-atlas/atlas-shop-vue` is listed in dependencies
 2. **Check AtlasCMS-Vue**: Verify AtlasCMS-Vue is installed first (required)
 3. **Run `npm install`**: Make sure dependencies are installed
 4. **Check path**: If using `file:` protocol, verify the path is correct
@@ -227,8 +227,8 @@ For local development, use the `file:` protocol in `package.json`:
 ```json
 {
   "dependencies": {
-    "@devcats/atlas-cms-vue": "file:./packages/AtlasCMS-Vue",
-    "@devcats/atlas-shop-vue": "file:./packages/AtlasShop-Vue"
+    "@devcats-atlas/atlas-cms-vue": "file:./packages/AtlasCMS-Vue",
+    "@devcats-atlas/atlas-shop-vue": "file:./packages/AtlasShop-Vue"
   }
 }
 ```
