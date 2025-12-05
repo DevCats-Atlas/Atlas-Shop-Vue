@@ -1,0 +1,19 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "name": "@devcats/atlas-shop-vue",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "AtlasShop Vue components and frontend assets",
+    "files": [
+        "resources/**/*"
+    ],
+    "scripts": {
+        "compile": "npx tsc",
+        "watch": "npx tsc --watch"
+    },
+    "devDependencies": {
+        "typescript": "^5.9.3"
+    }
+}
+
