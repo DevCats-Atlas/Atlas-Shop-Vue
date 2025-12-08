@@ -2,6 +2,9 @@
 import { computed, ref } from 'vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@admin/Layouts/AdminLayout.vue';
+import { useTranslation } from '@admin/js/utils/useTranslation';
+
+const { t } = useTranslation();
 
 const props = defineProps({
     title: {
@@ -136,7 +139,7 @@ const getPaginationUrl = (page) => {
                 <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
                     <div class="flex items-start justify-between gap-4">
                         <div>
-                            <p class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">Module</p>
+                            <p class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">{{ t('shop.common.module') }}</p>
                             <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
                                 {{ module.title }}
                                 <span class="text-gray-400 text-base font-normal">/ {{ action.title }}</span>
@@ -147,23 +150,23 @@ const getPaginationUrl = (page) => {
 
                 <!-- Search and Filter Form -->
                 <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Search & Filter Baskets</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.baskets.search_filter') }}</h2>
                     <form @submit.prevent="applyFilters" class="space-y-4">
                         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                             <!-- Search -->
                             <div>
-                                <label class="form-label">Search</label>
+                                <label class="form-label">{{ t('shop.baskets.search') }}</label>
                                 <input
                                     v-model="filterForm.search"
                                     type="text"
                                     class="form-input"
-                                    placeholder="User name, email, session ID or basket ID"
+                                    :placeholder="t('shop.baskets.search_placeholder')"
                                 />
                             </div>
 
                             <!-- Date From -->
                             <div>
-                                <label class="form-label">Date From</label>
+                                <label class="form-label">{{ t('shop.baskets.date_from') }}</label>
                                 <input
                                     v-model="filterForm.date_from"
                                     type="date"
@@ -173,7 +176,7 @@ const getPaginationUrl = (page) => {
 
                             <!-- Date To -->
                             <div>
-                                <label class="form-label">Date To</label>
+                                <label class="form-label">{{ t('shop.baskets.date_to') }}</label>
                                 <input
                                     v-model="filterForm.date_to"
                                     type="date"
@@ -183,19 +186,19 @@ const getPaginationUrl = (page) => {
 
                             <!-- Sort By -->
                             <div>
-                                <label class="form-label">Sort By</label>
+                                <label class="form-label">{{ t('shop.baskets.sort_by') }}</label>
                                 <select v-model="filterForm.sort_by" class="form-select">
-                                    <option value="created_at">Date Created</option>
-                                    <option value="updated_at">Date Updated</option>
-                                    <option value="total_amount">Total Amount</option>
-                                    <option value="id">Basket ID</option>
+                                    <option value="created_at">{{ t('shop.baskets.sort_date_created') }}</option>
+                                    <option value="updated_at">{{ t('shop.baskets.sort_date_updated') }}</option>
+                                    <option value="total_amount">{{ t('shop.baskets.sort_total_amount') }}</option>
+                                    <option value="id">{{ t('shop.baskets.sort_basket_id') }}</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-3">
                             <button type="submit" class="btn btn-primary" :disabled="filterForm.processing">
-                                {{ filterForm.processing ? 'Applying...' : 'Apply Filters' }}
+                                {{ filterForm.processing ? t('shop.baskets.applying') : t('shop.baskets.apply_filters') }}
                             </button>
                             <button
                                 v-if="hasActiveFilters"
@@ -203,7 +206,7 @@ const getPaginationUrl = (page) => {
                                 class="btn btn-outline"
                                 @click="clearFilters"
                             >
-                                Clear Filters
+                                {{ t('shop.baskets.clear_filters') }}
                             </button>
                         </div>
                     </form>
@@ -212,7 +215,7 @@ const getPaginationUrl = (page) => {
                 <!-- Baskets Table -->
                 <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Baskets</h2>
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.baskets.title') }}</h2>
                     </div>
 
                     <div class="overflow-x-auto">
@@ -220,12 +223,12 @@ const getPaginationUrl = (page) => {
                             <thead class="bg-gray-50 dark:bg-gray-900/40">
                                 <tr>
                                     <th class="px-4 py-2 w-8"></th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300 w-0">ID</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">Customer</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">Items</th>
-                                    <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">Total</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">Created</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">Updated</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300 w-0">{{ t('shop.baskets.id') }}</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.customer') }}</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.items') }}</th>
+                                    <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.total') }}</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.created') }}</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.updated') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -256,12 +259,12 @@ const getPaginationUrl = (page) => {
                                                 <div class="text-gray-500 dark:text-gray-400 text-xs">{{ basket.user_email || '' }}</div>
                                             </div>
                                             <div v-else class="text-sm text-gray-500 dark:text-gray-400">
-                                                <div class="font-mono text-xs">Guest</div>
+                                                <div class="font-mono text-xs">{{ t('shop.baskets.guest') }}</div>
                                                 <div class="text-xs">{{ basket.session_id?.substring(0, 8) }}...</div>
                                             </div>
                                         </td>
                                         <td class="px-4 py-2 text-sm text-gray-900 dark:text-white">
-                                            {{ basket.item_count }} {{ basket.item_count === 1 ? 'item' : 'items' }}
+                                            {{ basket.item_count }} {{ basket.item_count === 1 ? t('shop.baskets.item') : t('shop.baskets.items') }}
                                         </td>
                                         <td class="px-4 py-2 text-right text-sm font-medium text-gray-900 dark:text-white">
                                             {{ formatCurrency(basket.total_amount, basket.currency_sign, basket.currency_code) }}
@@ -277,7 +280,7 @@ const getPaginationUrl = (page) => {
                                     <tr v-if="expandedBaskets.has(basket.id)" class="bg-gray-50 dark:bg-gray-900/60">
                                         <td colspan="7" class="px-4 py-4">
                                             <div class="space-y-3">
-                                                <h3 class="font-semibold text-gray-900 dark:text-white text-sm mb-3">Products in Basket:</h3>
+                                                <h3 class="font-semibold text-gray-900 dark:text-white text-sm mb-3">{{ t('shop.baskets.products_in_basket') }}</h3>
                                                 <div class="grid gap-3">
                                                     <div
                                                         v-for="item in basket.items"
@@ -299,7 +302,7 @@ const getPaginationUrl = (page) => {
                                                         <div class="flex-1 min-w-0">
                                                             <div class="font-medium text-gray-900 dark:text-white">{{ item.product_title }}</div>
                                                             <div v-if="item.product_sku" class="text-xs text-gray-500 dark:text-gray-400">
-                                                                SKU: {{ item.product_sku }}
+                                                                {{ t('shop.baskets.sku') }}: {{ item.product_sku }}
                                                             </div>
                                                         </div>
                                                         <div class="text-right">
@@ -315,7 +318,7 @@ const getPaginationUrl = (page) => {
                                                 <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
                                                     <div class="flex justify-end">
                                                         <div class="text-right">
-                                                            <div class="text-sm text-gray-600 dark:text-gray-400">Total:</div>
+                                                            <div class="text-sm text-gray-600 dark:text-gray-400">{{ t('shop.baskets.total_label') }}</div>
                                                             <div class="text-lg font-semibold text-gray-900 dark:text-white">
                                                                 {{ formatCurrency(basket.total_amount, basket.currency_sign, basket.currency_code) }}
                                                             </div>
@@ -328,7 +331,7 @@ const getPaginationUrl = (page) => {
                                 </template>
                                 <tr v-if="baskets.length === 0">
                                     <td colspan="7" class="px-4 py-6 text-center text-gray-500 dark:text-gray-400">
-                                        {{ hasActiveFilters ? 'No baskets found matching your filters.' : 'No baskets yet.' }}
+                                        {{ hasActiveFilters ? t('shop.baskets.no_baskets_filtered') : t('shop.baskets.no_baskets') }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -343,7 +346,7 @@ const getPaginationUrl = (page) => {
                                 :href="getPaginationUrl(pagination.current_page - 1)"
                                 class="btn-text"
                             >
-                                Previous
+                                {{ t('shop.common.previous') }}
                             </Link>
                             <span v-else class="text-gray-400">Previous</span>
                             
@@ -352,20 +355,20 @@ const getPaginationUrl = (page) => {
                                 :href="getPaginationUrl(pagination.current_page + 1)"
                                 class="btn-text"
                             >
-                                Next
+                                {{ t('shop.common.next') }}
                             </Link>
                             <span v-else class="text-gray-400">Next</span>
                         </div>
                         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                             <div>
                                 <p class="text-sm text-gray-700 dark:text-gray-300">
-                                    Showing
+                                    {{ t('shop.common.showing') }}
                                     <span class="font-medium">{{ ((pagination.current_page - 1) * pagination.per_page) + 1 }}</span>
-                                    to
+                                    {{ t('shop.common.to') }}
                                     <span class="font-medium">{{ Math.min(pagination.current_page * pagination.per_page, pagination.total) }}</span>
-                                    of
+                                    {{ t('shop.common.of') }}
                                     <span class="font-medium">{{ pagination.total }}</span>
-                                    results
+                                    {{ t('shop.common.results') }}
                                 </p>
                             </div>
                             <div class="flex gap-1">
