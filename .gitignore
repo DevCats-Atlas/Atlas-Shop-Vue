@@ -1,0 +1,10 @@
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/node_modules
+/vendor
+.env
+.DS_Store
