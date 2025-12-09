@@ -564,7 +564,7 @@ onMounted(() => {
                 <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
                     <div class="flex items-start justify-between gap-4">
                         <div>
-                            <p class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">Order</p>
+                            <p class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">{{ t('shop.orders.order') }}</p>
                             <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
                                 {{ order.order_number }}
                             </h1>
@@ -584,7 +584,7 @@ onMounted(() => {
                                 class="btn btn-outline"
                                 @click="openOrderUpdateModal"
                             >
-                                Edit Order
+                                {{ t('shop.orders.edit_order') }}
                             </button>
                             <button
                                 v-if="availableStatusTransitions.length > 0"
@@ -595,7 +595,7 @@ onMounted(() => {
                                 {{ t('shop.orders.update_status') }}
                             </button>
                             <Link :href="indexUrl" class="btn btn-outline" preserve-scroll>
-                                Back to Orders
+                                {{ t('shop.orders.back_to_orders') }}
                             </Link>
                         </div>
                     </div>
@@ -606,16 +606,16 @@ onMounted(() => {
                     <div class="lg:col-span-2 space-y-6">
                         <!-- Order Items -->
                         <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Order Items</h2>
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.order_items') }}</h2>
                             <div class="overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                                     <thead class="bg-gray-50 dark:bg-gray-900/40">
                                         <tr>
-                                            <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">Product</th>
-                                            <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">SKU</th>
-                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">Quantity</th>
-                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">Price</th>
-                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">Subtotal</th>
+                                            <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.product') }}</th>
+                                            <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.sku') }}</th>
+                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.quantity') }}</th>
+                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.price') }}</th>
+                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.subtotal') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -640,7 +640,7 @@ onMounted(() => {
                                                             v-if="item.attributes && Object.keys(item.attributes).length > 0"
                                                             class="text-xs text-gray-500 dark:text-gray-400"
                                                         >
-                                                            Attributes: {{ Object.keys(item.attributes).map(key => `${key}: ${item.attributes[key]}`).join(', ') }}
+                                                            {{ t('shop.orders.attributes') }}: {{ Object.keys(item.attributes).map(key => `${key}: ${item.attributes[key]}`).join(', ') }}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -665,14 +665,14 @@ onMounted(() => {
 
                         <!-- Customer Information -->
                         <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Customer Information</h2>
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.customer_information') }}</h2>
                             <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 <div>
-                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Name</dt>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('shop.orders.name') }}</dt>
                                     <dd class="mt-1 text-sm text-gray-900 dark:text-white">{{ order.customer.name }}</dd>
                                 </div>
                                 <div>
-                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</dt>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('shop.orders.email') }}</dt>
                                     <dd class="mt-1 text-sm text-gray-900 dark:text-white">
                                         <a :href="`mailto:${order.customer.email}`" class="text-indigo-600 dark:text-indigo-300 hover:underline">
                                             {{ order.customer.email }}
@@ -680,7 +680,7 @@ onMounted(() => {
                                     </dd>
                                 </div>
                                 <div v-if="order.customer.phone">
-                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</dt>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('shop.orders.phone') }}</dt>
                                     <dd class="mt-1 text-sm text-gray-900 dark:text-white">
                                         <a :href="`tel:${order.customer.phone}`" class="text-indigo-600 dark:text-indigo-300 hover:underline">
                                             {{ order.customer.phone }}
@@ -688,7 +688,7 @@ onMounted(() => {
                                     </dd>
                                 </div>
                                 <div v-if="order.customer.address">
-                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Address</dt>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('shop.orders.address') }}</dt>
                                     <dd class="mt-1 text-sm text-gray-900 dark:text-white whitespace-pre-line">{{ order.customer.address }}</dd>
                                 </div>
                             </dl>
@@ -696,34 +696,34 @@ onMounted(() => {
 
                         <!-- Delivery & Payment Information -->
                         <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Delivery & Payment</h2>
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.delivery_payment') }}</h2>
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                 <!-- Delivery Method -->
                                 <div>
-                                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-2">Delivery Method</h3>
+                                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-2">{{ t('shop.orders.delivery_method') }}</h3>
                                     <p class="text-sm text-gray-900 dark:text-white">
                                         {{ order.delivery_method?.title || '-' }}
                                     </p>
                                     <div v-if="order.delivery_data && Object.keys(order.delivery_data).length > 0" class="mt-3 space-y-3">
                                         <!-- Location Information -->
                                         <div v-if="order.delivery_data.region_name || order.delivery_data.city_name">
-                                            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Location</h4>
+                                            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('shop.orders.location') }}</h4>
                                             <div class="space-y-1 pl-2">
                                                 <p v-if="order.delivery_data.region_name" class="text-xs text-gray-600 dark:text-gray-400">
-                                                    <span class="font-medium">Region:</span> {{ order.delivery_data.region_name }}
+                                                    <span class="font-medium">{{ t('shop.orders.region') }}:</span> {{ order.delivery_data.region_name }}
                                                 </p>
                                                 <p v-if="order.delivery_data.city_name" class="text-xs text-gray-600 dark:text-gray-400">
-                                                    <span class="font-medium">City:</span> {{ order.delivery_data.city_name }}
+                                                    <span class="font-medium">{{ t('shop.orders.city') }}:</span> {{ order.delivery_data.city_name }}
                                                 </p>
                                                 <p v-else-if="order.delivery_data.city" class="text-xs text-gray-600 dark:text-gray-400">
-                                                    <span class="font-medium">City:</span> {{ order.delivery_data.city }}
+                                                    <span class="font-medium">{{ t('shop.orders.city') }}:</span> {{ order.delivery_data.city }}
                                                 </p>
                                             </div>
                                         </div>
                                         
                                         <!-- Delivery Point Information -->
                                         <div v-if="order.delivery_data.delivery_point_name || order.delivery_data.delivery_point_address || order.delivery_data.delivery_point_number">
-                                            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Delivery Point</h4>
+                                            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('shop.orders.delivery_point') }}</h4>
                                             <div class="space-y-1 pl-2">
                                                 <p v-if="order.delivery_data.delivery_point_name" class="text-xs text-gray-600 dark:text-gray-400">
                                                     {{ order.delivery_data.delivery_point_name }}
@@ -737,13 +737,13 @@ onMounted(() => {
                                         
                                         <!-- Recipient Information -->
                                         <div v-if="order.delivery_data.recipient_name || order.delivery_data.recipient_phone">
-                                            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Recipient</h4>
+                                            <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{{ t('shop.orders.recipient') }}</h4>
                                             <div class="space-y-1 pl-2">
                                                 <p v-if="order.delivery_data.recipient_name" class="text-xs text-gray-600 dark:text-gray-400">
-                                                    <span class="font-medium">Name:</span> {{ order.delivery_data.recipient_name }}
+                                                    <span class="font-medium">{{ t('shop.orders.name') }}:</span> {{ order.delivery_data.recipient_name }}
                                                 </p>
                                                 <p v-if="order.delivery_data.recipient_phone" class="text-xs text-gray-600 dark:text-gray-400">
-                                                    <span class="font-medium">Phone:</span> {{ order.delivery_data.recipient_phone }}
+                                                    <span class="font-medium">{{ t('shop.orders.phone') }}:</span> {{ order.delivery_data.recipient_phone }}
                                                 </p>
                                             </div>
                                         </div>
@@ -762,18 +762,18 @@ onMounted(() => {
                                 </div>
                                 <!-- Payment Method -->
                                 <div>
-                                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-2">Payment Method</h3>
+                                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-2">{{ t('shop.orders.payment_method') }}</h3>
                                     <p class="text-sm text-gray-900 dark:text-white">
                                         {{ order.payment_method?.title || '-' }}
                                     </p>
                                     
                                     <!-- Payment Transaction Details -->
                                     <div v-if="paymentTransaction" class="mt-4 space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                                        <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Payment Details</h4>
+                                        <h4 class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ t('shop.orders.payment_details') }}</h4>
                                         
                                         <!-- Payment Status -->
                                         <div class="flex items-center justify-between">
-                                            <span class="text-xs text-gray-600 dark:text-gray-400">Status:</span>
+                                            <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('shop.orders.status') }}:</span>
                                             <span 
                                                 class="text-xs font-medium px-2 py-1 rounded"
                                                 :class="{
@@ -789,7 +789,7 @@ onMounted(() => {
                                         
                                         <!-- Amount -->
                                         <div class="flex items-center justify-between">
-                                            <span class="text-xs text-gray-600 dark:text-gray-400">Amount:</span>
+                                            <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('shop.orders.amount') }}:</span>
                                             <span class="text-xs font-medium text-gray-900 dark:text-white">
                                                 {{ formatPrice(paymentTransaction.amount, paymentTransaction.currency) }}
                                             </span>
@@ -797,7 +797,7 @@ onMounted(() => {
                                         
                                         <!-- Provider -->
                                         <div class="flex items-center justify-between">
-                                            <span class="text-xs text-gray-600 dark:text-gray-400">Provider:</span>
+                                            <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('shop.orders.provider') }}:</span>
                                             <span class="text-xs font-medium text-gray-900 dark:text-white uppercase">
                                                 {{ paymentTransaction.provider }}
                                             </span>
@@ -805,7 +805,7 @@ onMounted(() => {
                                         
                                         <!-- Provider Transaction ID -->
                                         <div v-if="paymentTransaction.provider_transaction_id" class="flex items-center justify-between">
-                                            <span class="text-xs text-gray-600 dark:text-gray-400">Transaction ID:</span>
+                                            <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('shop.orders.transaction_id') }}:</span>
                                             <span class="text-xs font-mono text-gray-700 dark:text-gray-300">
                                                 {{ paymentTransaction.provider_transaction_id }}
                                             </span>
@@ -813,7 +813,7 @@ onMounted(() => {
                                         
                                         <!-- Processed Date -->
                                         <div v-if="paymentTransaction.processed_at" class="flex items-center justify-between">
-                                            <span class="text-xs text-gray-600 dark:text-gray-400">Processed:</span>
+                                            <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('shop.orders.processed') }}:</span>
                                             <span class="text-xs text-gray-700 dark:text-gray-300">
                                                 {{ formatDate(paymentTransaction.processed_at) }}
                                             </span>
@@ -821,7 +821,7 @@ onMounted(() => {
                                         
                                         <!-- Created Date -->
                                         <div v-if="paymentTransaction.created_at" class="flex items-center justify-between">
-                                            <span class="text-xs text-gray-600 dark:text-gray-400">Created:</span>
+                                            <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('shop.orders.created') }}:</span>
                                             <span class="text-xs text-gray-700 dark:text-gray-300">
                                                 {{ formatDate(paymentTransaction.created_at) }}
                                             </span>
@@ -830,7 +830,7 @@ onMounted(() => {
                                         <!-- Error Message -->
                                         <div v-if="paymentTransaction.error_message" class="mt-2 p-2 bg-red-50 dark:bg-red-900/20 rounded">
                                             <p class="text-xs text-red-600 dark:text-red-400">
-                                                <span class="font-medium">Error:</span> {{ paymentTransaction.error_message }}
+                                                <span class="font-medium">{{ t('shop.orders.error') }}:</span> {{ paymentTransaction.error_message }}
                                             </p>
                                         </div>
                                     </div>
@@ -838,7 +838,7 @@ onMounted(() => {
                                     <!-- No Payment Transaction Message -->
                                     <div v-else-if="order.payment_method" class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                                         <p class="text-xs text-gray-500 dark:text-gray-400 italic">
-                                            Payment transaction not found or not yet processed.
+                                            {{ t('shop.orders.payment_transaction_not_found') }}
                                         </p>
                                     </div>
                                 </div>
@@ -850,34 +850,34 @@ onMounted(() => {
                     <div class="space-y-6">
                         <!-- Financial Summary -->
                         <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Financial Summary</h2>
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.financial_summary') }}</h2>
                             <dl class="space-y-3">
                                 <div class="flex justify-between">
-                                    <dt class="text-sm text-gray-600 dark:text-gray-400">Subtotal</dt>
+                                    <dt class="text-sm text-gray-600 dark:text-gray-400">{{ t('shop.orders.subtotal') }}</dt>
                                     <dd class="text-sm font-medium text-gray-900 dark:text-white">
                                         {{ formatCurrency(order.financial.subtotal, order.currency?.left_sign || order.currency?.right_sign, order.currency?.code) }}
                                     </dd>
                                 </div>
                                 <div v-if="order.financial.tax_amount > 0" class="flex justify-between">
-                                    <dt class="text-sm text-gray-600 dark:text-gray-400">Tax</dt>
+                                    <dt class="text-sm text-gray-600 dark:text-gray-400">{{ t('shop.orders.tax') }}</dt>
                                     <dd class="text-sm font-medium text-gray-900 dark:text-white">
                                         {{ formatCurrency(order.financial.tax_amount, order.currency?.left_sign || order.currency?.right_sign, order.currency?.code) }}
                                     </dd>
                                 </div>
                                 <div v-if="order.financial.shipping_amount > 0" class="flex justify-between">
-                                    <dt class="text-sm text-gray-600 dark:text-gray-400">Shipping</dt>
+                                    <dt class="text-sm text-gray-600 dark:text-gray-400">{{ t('shop.orders.shipping') }}</dt>
                                     <dd class="text-sm font-medium text-gray-900 dark:text-white">
                                         {{ formatCurrency(order.financial.shipping_amount, order.currency?.left_sign || order.currency?.right_sign, order.currency?.code) }}
                                     </dd>
                                 </div>
                                 <div v-if="order.financial.discount_amount > 0" class="flex justify-between">
-                                    <dt class="text-sm text-gray-600 dark:text-gray-400">Discount</dt>
+                                    <dt class="text-sm text-gray-600 dark:text-gray-400">{{ t('shop.orders.discount') }}</dt>
                                     <dd class="text-sm font-medium text-gray-900 dark:text-white text-red-600 dark:text-red-400">
                                         -{{ formatCurrency(order.financial.discount_amount, order.currency?.left_sign || order.currency?.right_sign, order.currency?.code) }}
                                     </dd>
                                 </div>
                                 <div class="flex justify-between border-t border-gray-200 dark:border-gray-700 pt-3">
-                                    <dt class="text-base font-semibold text-gray-900 dark:text-white">Total</dt>
+                                    <dt class="text-base font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.total') }}</dt>
                                     <dd class="text-base font-semibold text-gray-900 dark:text-white">
                                         {{ formatCurrency(order.financial.total_amount, order.currency?.left_sign || order.currency?.right_sign, order.currency?.code) }}
                                     </dd>
@@ -887,7 +887,7 @@ onMounted(() => {
 
                         <!-- Status History -->
                         <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Status History</h2>
+                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.status_history') }}</h2>
                             <div class="space-y-4">
                                 <div
                                     v-for="history in statusHistory"
@@ -907,12 +907,12 @@ onMounted(() => {
                                                 {{ history.status_to.charAt(0).toUpperCase() + history.status_to.slice(1) }}
                                             </span>
                                             <span v-if="history.status_from" class="text-xs text-gray-500 dark:text-gray-400">
-                                                from {{ history.status_from }}
+                                                {{ t('shop.orders.from') }} {{ history.status_from }}
                                             </span>
                                         </div>
                                         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                             {{ history.formatted_date }}
-                                            <span v-if="history.changed_by_name"> by {{ history.changed_by_name }}</span>
+                                            <span v-if="history.changed_by_name"> {{ t('shop.orders.by') }} {{ history.changed_by_name }}</span>
                                         </p>
                                         <p v-if="history.notes" class="text-sm text-gray-700 dark:text-gray-300 mt-1">
                                             {{ history.notes }}
@@ -920,7 +920,7 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div v-if="statusHistory.length === 0" class="text-sm text-gray-500 dark:text-gray-400">
-                                    No status changes yet.
+                                    {{ t('shop.orders.no_status_changes') }}
                                 </div>
                             </div>
                         </section>
@@ -933,7 +933,7 @@ onMounted(() => {
         <ModalDialog :open="statusUpdateModalOpen" :title="t('shop.orders.update_order_status')" @close="closeStatusUpdateModal">
             <form @submit.prevent="submitStatusUpdate" class="space-y-4">
                 <div>
-                    <label class="form-label">Current Status</label>
+                    <label class="form-label">{{ t('shop.orders.current_status') }}</label>
                     <p class="text-sm text-gray-700 dark:text-gray-300">
                         <span
                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
@@ -945,14 +945,14 @@ onMounted(() => {
                 </div>
 
                 <div>
-                    <label class="form-label">New Status</label>
+                    <label class="form-label">{{ t('shop.orders.new_status') }}</label>
                     <select
                         v-model="statusUpdateForm.status"
                         class="form-select"
                         :class="{ 'form-input-error': statusUpdateForm.errors.status }"
                         required
                     >
-                        <option value="" disabled>Select new status</option>
+                        <option value="" disabled>{{ t('shop.orders.select_new_status') }}</option>
                         <option
                             v-for="status in availableStatusTransitions"
                             :key="status.value"
@@ -965,18 +965,18 @@ onMounted(() => {
                         {{ statusUpdateForm.errors.status }}
                     </p>
                     <p v-if="availableStatusTransitions.length === 0" class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                        No status transitions available. This order is in a terminal state.
+                        {{ t('shop.orders.no_status_transitions') }}
                     </p>
                 </div>
 
                 <div>
-                    <label class="form-label">Notes (Optional)</label>
+                    <label class="form-label">{{ t('shop.orders.notes_optional') }}</label>
                     <textarea
                         v-model="statusUpdateForm.notes"
                         class="form-textarea"
                         :class="{ 'form-input-error': statusUpdateForm.errors.notes }"
                         rows="3"
-                        placeholder="Add notes about this status change..."
+                        :placeholder="t('shop.orders.add_notes_status_change')"
                     ></textarea>
                     <p v-if="statusUpdateForm.errors.notes" class="mt-1 text-sm text-red-600 dark:text-red-400">
                         {{ statusUpdateForm.errors.notes }}
@@ -1001,10 +1001,10 @@ onMounted(() => {
             <form @submit.prevent="submitOrderUpdate" class="space-y-6">
                 <!-- Customer Information -->
                 <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Customer Information</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.customer_information') }}</h3>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="form-label">Customer Name *</label>
+                            <label class="form-label">{{ t('shop.orders.customer_name') }} *</label>
                             <input
                                 v-model="orderUpdateForm.customer_name"
                                 type="text"
@@ -1017,7 +1017,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <div>
-                            <label class="form-label">Customer Email *</label>
+                            <label class="form-label">{{ t('shop.orders.customer_email') }} *</label>
                             <input
                                 v-model="orderUpdateForm.customer_email"
                                 type="email"
@@ -1030,7 +1030,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <div>
-                            <label class="form-label">Customer Phone</label>
+                            <label class="form-label">{{ t('shop.orders.customer_phone') }}</label>
                             <input
                                 v-model="orderUpdateForm.customer_phone"
                                 type="tel"
@@ -1042,7 +1042,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <div>
-                            <label class="form-label">Customer Address</label>
+                            <label class="form-label">{{ t('shop.orders.customer_address') }}</label>
                             <textarea
                                 v-model="orderUpdateForm.customer_address"
                                 class="form-textarea"
@@ -1058,10 +1058,10 @@ onMounted(() => {
 
                 <!-- Financial Information -->
                 <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Financial Information</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.financial_information') }}</h3>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="form-label">Subtotal</label>
+                            <label class="form-label">{{ t('shop.orders.subtotal') }}</label>
                             <input
                                 v-model.number="orderUpdateForm.subtotal"
                                 type="number"
@@ -1076,7 +1076,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <div>
-                            <label class="form-label">Tax Amount</label>
+                            <label class="form-label">{{ t('shop.orders.tax_amount') }}</label>
                             <input
                                 v-model.number="orderUpdateForm.tax_amount"
                                 type="number"
@@ -1091,7 +1091,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <div>
-                            <label class="form-label">Shipping Amount</label>
+                            <label class="form-label">{{ t('shop.orders.shipping_amount') }}</label>
                             <input
                                 v-model.number="orderUpdateForm.shipping_amount"
                                 type="number"
@@ -1106,7 +1106,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <div>
-                            <label class="form-label">Discount Amount</label>
+                            <label class="form-label">{{ t('shop.orders.discount_amount') }}</label>
                             <input
                                 v-model.number="orderUpdateForm.discount_amount"
                                 type="number"
@@ -1121,7 +1121,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <div>
-                            <label class="form-label">Total Amount</label>
+                            <label class="form-label">{{ t('shop.orders.total_amount') }}</label>
                             <input
                                 v-model.number="orderUpdateForm.total_amount"
                                 type="number"
@@ -1131,7 +1131,7 @@ onMounted(() => {
                                 :class="{ 'form-input-error': orderUpdateForm.errors.total_amount }"
                                 readonly
                             />
-                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Auto-calculated</p>
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ t('shop.orders.auto_calculated') }}</p>
                             <p v-if="orderUpdateForm.errors.total_amount" class="mt-1 text-sm text-red-600 dark:text-red-400">
                                 {{ orderUpdateForm.errors.total_amount }}
                             </p>
@@ -1141,17 +1141,17 @@ onMounted(() => {
 
                 <!-- Delivery and Payment Methods -->
                 <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Delivery & Payment</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.delivery_payment') }}</h3>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="form-label">Delivery Method</label>
+                            <label class="form-label">{{ t('shop.orders.delivery_method') }}</label>
                             <select
                                 v-model.number="orderUpdateForm.delivery_method_id"
                                 class="form-select"
                                 :class="{ 'form-input-error': orderUpdateForm.errors.delivery_method_id }"
                                 @change="watchDeliveryMethod"
                             >
-                                <option :value="null">None</option>
+                                <option :value="null">{{ t('shop.orders.none') }}</option>
                                 <option
                                     v-for="method in deliveryMethods"
                                     :key="method.id"
@@ -1166,10 +1166,10 @@ onMounted(() => {
                             
                             <!-- Delivery Method Fields -->
                             <div v-if="deliveryMethodFieldsLoading" class="mt-4 text-sm text-gray-500 dark:text-gray-400">
-                                Loading delivery options...
+                                {{ t('shop.orders.loading_delivery_options') }}
                             </div>
                             <div v-else-if="deliveryMethodFields.length > 0" class="mt-4 space-y-4">
-                                <h4 class="text-sm font-semibold text-gray-900 dark:text-white">Delivery Details</h4>
+                                <h4 class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.delivery_details') }}</h4>
                                 <div
                                     v-for="field in deliveryMethodFields"
                                     :key="field.name"
@@ -1223,7 +1223,7 @@ onMounted(() => {
                                         :disabled="field.options === 'dynamic' && (!fieldOptions[field.name] || fieldOptions[field.name].length === 0)"
                                         @change="handleFieldChange(field.name, orderUpdateForm.delivery_data[field.name])"
                                     >
-                                        <option value="">{{ field.placeholder || 'Select...' }}</option>
+                                        <option value="">{{ field.placeholder || t('shop.orders.select') }}</option>
                                         <option
                                             v-for="option in (field.options === 'dynamic' ? (fieldOptions[field.name] || []) : (field.options || []))"
                                             :key="typeof option === 'object' ? option.value : option"
@@ -1260,13 +1260,13 @@ onMounted(() => {
                             </div>
                         </div>
                         <div>
-                            <label class="form-label">Payment Method</label>
+                            <label class="form-label">{{ t('shop.orders.payment_method') }}</label>
                             <select
                                 v-model.number="orderUpdateForm.payment_method_id"
                                 class="form-select"
                                 :class="{ 'form-input-error': orderUpdateForm.errors.payment_method_id }"
                             >
-                                <option :value="null">None</option>
+                                <option :value="null">{{ t('shop.orders.none') }}</option>
                                 <option
                                     v-for="method in paymentMethods"
                                     :key="method.id"
@@ -1284,13 +1284,13 @@ onMounted(() => {
 
                 <!-- Notes -->
                 <div>
-                    <label class="form-label">Order Notes</label>
+                    <label class="form-label">{{ t('shop.orders.order_notes') }}</label>
                     <textarea
                         v-model="orderUpdateForm.notes"
                         class="form-textarea"
                         :class="{ 'form-input-error': orderUpdateForm.errors.notes }"
                         rows="4"
-                        placeholder="Add notes about this order..."
+                        :placeholder="t('shop.orders.add_notes_order')"
                     ></textarea>
                     <p v-if="orderUpdateForm.errors.notes" class="mt-1 text-sm text-red-600 dark:text-red-400">
                         {{ orderUpdateForm.errors.notes }}
