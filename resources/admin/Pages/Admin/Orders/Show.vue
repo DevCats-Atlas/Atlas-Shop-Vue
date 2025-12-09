@@ -4,6 +4,9 @@ import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@admin/Layouts/AdminLayout.vue';
 import ModalDialog from '@/components/ModalDialog.vue';
 import { useToast } from '@/composables/useToast.js';
+import { useTranslation } from '@/utils/useTranslation.js';
+
+const { t } = useTranslation();
 
 const props = defineProps({
     title: {
@@ -86,8 +89,8 @@ const submitStatusUpdate = () => {
         onSuccess: () => {
             closeStatusUpdateModal();
             showToast({
-                title: 'Status Updated',
-                message: 'Order status has been updated successfully.',
+                title: t('shop.orders.status_updated'),
+                message: t('shop.orders.status_updated_message'),
                 intent: 'success',
             });
         },
@@ -503,8 +506,8 @@ const submitOrderUpdate = () => {
         onSuccess: () => {
             closeOrderUpdateModal();
             showToast({
-                title: 'Order Updated',
-                message: 'Order information has been updated successfully.',
+                title: t('shop.orders.order_updated'),
+                message: t('shop.orders.order_updated_message'),
                 intent: 'success',
             });
         },
@@ -589,7 +592,7 @@ onMounted(() => {
                                 class="btn btn-primary"
                                 @click="openStatusUpdateModal"
                             >
-                                Update Status
+                                {{ t('shop.orders.update_status') }}
                             </button>
                             <Link :href="indexUrl" class="btn btn-outline" preserve-scroll>
                                 Back to Orders
@@ -927,7 +930,7 @@ onMounted(() => {
         </div>
 
         <!-- Status Update Modal -->
-        <ModalDialog :open="statusUpdateModalOpen" title="Update Order Status" @close="closeStatusUpdateModal">
+        <ModalDialog :open="statusUpdateModalOpen" :title="t('shop.orders.update_order_status')" @close="closeStatusUpdateModal">
             <form @submit.prevent="submitStatusUpdate" class="space-y-4">
                 <div>
                     <label class="form-label">Current Status</label>
@@ -981,20 +984,20 @@ onMounted(() => {
                 </div>
 
                 <div class="flex items-center justify-end gap-3">
-                    <button type="button" class="btn-text" @click="closeStatusUpdateModal">Cancel</button>
+                    <button type="button" class="btn-text" @click="closeStatusUpdateModal">{{ t('admin.common.cancel') }}</button>
                     <button
                         type="submit"
                         class="btn btn-primary"
                         :disabled="statusUpdateForm.processing || availableStatusTransitions.length === 0"
                     >
-                        {{ statusUpdateForm.processing ? 'Updating...' : 'Update Status' }}
+                        {{ statusUpdateForm.processing ? t('shop.orders.updating') : t('shop.orders.update_status') }}
                     </button>
                 </div>
             </form>
         </ModalDialog>
 
         <!-- Order Update Modal -->
-        <ModalDialog :open="orderUpdateModalOpen" title="Edit Order Information" @close="closeOrderUpdateModal" size="xl">
+        <ModalDialog :open="orderUpdateModalOpen" :title="t('shop.orders.edit_order_information')" @close="closeOrderUpdateModal" size="xl">
             <form @submit.prevent="submitOrderUpdate" class="space-y-6">
                 <!-- Customer Information -->
                 <div class="space-y-4">
@@ -1295,13 +1298,13 @@ onMounted(() => {
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <button type="button" class="btn-text" @click="closeOrderUpdateModal">Cancel</button>
+                    <button type="button" class="btn-text" @click="closeOrderUpdateModal">{{ t('admin.common.cancel') }}</button>
                     <button
                         type="submit"
                         class="btn btn-primary"
                         :disabled="orderUpdateForm.processing"
                     >
-                        {{ orderUpdateForm.processing ? 'Updating...' : 'Update Order' }}
+                        {{ orderUpdateForm.processing ? t('shop.orders.updating') : t('shop.orders.update_order') }}
                     </button>
                 </div>
             </form>
