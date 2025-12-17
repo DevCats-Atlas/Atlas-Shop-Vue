@@ -136,11 +136,11 @@ const getPaginationUrl = (page) => {
 
         <div class="py-6">            
             <div class="mx-auto space-y-6 max-w-full px-4 sm:px-6 lg:px-10">
-                <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
+                <section class="section">
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <p class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">{{ t('shop.common.module') }}</p>
-                            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                            <h1 class="heading-1">
                                 {{ module.title }}
                                 <span class="text-gray-400 text-base font-normal">/ {{ action.title }}</span>
                             </h1>
@@ -149,8 +149,8 @@ const getPaginationUrl = (page) => {
                 </section>
 
                 <!-- Search and Filter Form -->
-                <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.baskets.search_filter') }}</h2>
+                <section class="section">
+                    <h2 class="section-heading">{{ t('shop.baskets.search_filter') }}</h2>
                     <form @submit.prevent="applyFilters" class="space-y-4">
                         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                             <!-- Search -->
@@ -213,28 +213,28 @@ const getPaginationUrl = (page) => {
                 </section>
 
                 <!-- Baskets Table -->
-                <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
+                <section class="section">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.baskets.title') }}</h2>
+                        <h2 class="section-heading">{{ t('shop.baskets.title') }}</h2>
                     </div>
 
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                             <thead class="bg-gray-50 dark:bg-gray-900/40">
                                 <tr>
-                                    <th class="px-4 py-2 w-8"></th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300 w-0">{{ t('shop.baskets.id') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.customer') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.items') }}</th>
-                                    <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.total') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.created') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.updated') }}</th>
+                                    <th class="table-cell w-8"></th>
+                                    <th class="table-header w-0">{{ t('shop.baskets.id') }}</th>
+                                    <th class="table-header">{{ t('shop.baskets.customer') }}</th>
+                                    <th class="table-header">{{ t('shop.baskets.items') }}</th>
+                                    <th class="table-cell text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.baskets.total') }}</th>
+                                    <th class="table-header">{{ t('shop.baskets.created') }}</th>
+                                    <th class="table-header">{{ t('shop.baskets.updated') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <template v-for="basket in baskets" :key="basket.id">
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-900/40 transition-colors cursor-pointer" @click="toggleBasket(basket.id)">
-                                        <td class="px-4 py-2">
+                                        <td class="table-cell">
                                             <button
                                                 class="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded"
                                                 @click.stop="toggleBasket(basket.id)"
@@ -250,10 +250,10 @@ const getPaginationUrl = (page) => {
                                                 </svg>
                                             </button>
                                         </td>
-                                        <td class="px-4 py-2">
+                                        <td class="table-cell">
                                             <span class="font-mono text-xs text-gray-600 dark:text-gray-400">#{{ basket.id }}</span>
                                         </td>
-                                        <td class="px-4 py-2">
+                                        <td class="table-cell">
                                             <div v-if="basket.user_name || basket.user_email" class="text-sm">
                                                 <div class="font-medium text-gray-900 dark:text-white">{{ basket.user_name || '-' }}</div>
                                                 <div class="text-gray-500 dark:text-gray-400 text-xs">{{ basket.user_email || '' }}</div>
@@ -263,16 +263,16 @@ const getPaginationUrl = (page) => {
                                                 <div class="text-xs">{{ basket.session_id?.substring(0, 8) }}...</div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-2 text-sm text-gray-900 dark:text-white">
+                                        <td class="table-cell text-sm text-gray-900 dark:text-white">
                                             {{ basket.item_count }} {{ basket.item_count === 1 ? t('shop.baskets.item') : t('shop.baskets.items') }}
                                         </td>
-                                        <td class="px-4 py-2 text-right text-sm font-medium text-gray-900 dark:text-white">
+                                        <td class="table-cell text-right text-sm font-medium text-gray-900 dark:text-white">
                                             {{ formatCurrency(basket.total_amount, basket.currency_sign, basket.currency_code) }}
                                         </td>
-                                        <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-400">
+                                        <td class="table-cell text-sm text-gray-600 dark:text-gray-400">
                                             {{ formatDate(basket.created_at) }}
                                         </td>
-                                        <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-400">
+                                        <td class="table-cell text-sm text-gray-600 dark:text-gray-400">
                                             {{ formatDate(basket.updated_at) }}
                                         </td>
                                     </tr>
@@ -319,7 +319,7 @@ const getPaginationUrl = (page) => {
                                                     <div class="flex justify-end">
                                                         <div class="text-right">
                                                             <div class="text-sm text-gray-600 dark:text-gray-400">{{ t('shop.baskets.total_label') }}</div>
-                                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                            <div class="section-heading">
                                                                 {{ formatCurrency(basket.total_amount, basket.currency_sign, basket.currency_code) }}
                                                             </div>
                                                         </div>

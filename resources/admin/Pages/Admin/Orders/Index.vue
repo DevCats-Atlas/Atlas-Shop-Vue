@@ -131,11 +131,11 @@ const getPaginationUrl = (page) => {
 
         <div class="py-6">            
             <div class="mx-auto space-y-6 max-w-full px-4 sm:px-6 lg:px-10">
-                <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
+                <section class="section">
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <p class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">{{ t('shop.common.module') }}</p>
-                            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                            <h1 class="heading-1">
                                 {{ module.title }}
                                 <span class="text-gray-400 text-base font-normal">/ {{ action.title }}</span>
                             </h1>
@@ -144,8 +144,8 @@ const getPaginationUrl = (page) => {
                 </section>
 
                 <!-- Search and Filter Form -->
-                <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.search_filter') }}</h2>
+                <section class="section">
+                    <h2 class="section-heading">{{ t('shop.orders.search_filter') }}</h2>
                     <form @submit.prevent="applyFilters" class="space-y-4">
                         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                             <!-- Search -->
@@ -228,22 +228,22 @@ const getPaginationUrl = (page) => {
                 </section>
 
                 <!-- Orders Table -->
-                <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
+                <section class="section">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.title') }}</h2>
+                        <h2 class="section-heading">{{ t('shop.orders.title') }}</h2>
                     </div>
 
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                             <thead class="bg-gray-50 dark:bg-gray-900/40">
                                 <tr>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300 w-0">{{ t('shop.orders.order_number') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.date') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.customer') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.email') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.status') }}</th>
-                                    <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.total') }}</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300 w-32">{{ t('shop.orders.actions') }}</th>
+                                    <th class="table-header w-0">{{ t('shop.orders.order_number') }}</th>
+                                    <th class="table-header">{{ t('shop.orders.date') }}</th>
+                                    <th class="table-header">{{ t('shop.orders.customer') }}</th>
+                                    <th class="table-header">{{ t('shop.orders.email') }}</th>
+                                    <th class="table-header">{{ t('shop.orders.status') }}</th>
+                                    <th class="table-cell text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.total') }}</th>
+                                    <th class="table-header w-32">{{ t('shop.orders.actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -252,7 +252,7 @@ const getPaginationUrl = (page) => {
                                     :key="order.id"
                                     class="hover:bg-gray-50 dark:hover:bg-gray-900/40 transition-colors"
                                 >
-                                    <td class="px-4 py-2">
+                                    <td class="table-cell">
                                         <Link
                                             :href="`${baseUrl}/show/${order.order_number}`"
                                             class="font-mono text-sm font-medium text-indigo-600 dark:text-indigo-300 hover:underline"
@@ -261,16 +261,16 @@ const getPaginationUrl = (page) => {
                                             {{ order.order_number }}
                                         </Link>
                                     </td>
-                                    <td class="px-4 py-2 text-sm text-gray-900 dark:text-white">
+                                    <td class="table-cell text-sm text-gray-900 dark:text-white">
                                         {{ order.date }}
                                     </td>
-                                    <td class="px-4 py-2 text-sm text-gray-900 dark:text-white">
+                                    <td class="table-cell text-sm text-gray-900 dark:text-white">
                                         {{ order.customer_name }}
                                     </td>
-                                    <td class="px-4 py-2 text-sm text-gray-900 dark:text-white">
+                                    <td class="table-cell text-sm text-gray-900 dark:text-white">
                                         {{ order.customer_email }}
                                     </td>
-                                    <td class="px-4 py-2">
+                                    <td class="table-cell">
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                                             :class="getStatusBadgeColor(order.status)"
@@ -278,10 +278,10 @@ const getPaginationUrl = (page) => {
                                             {{ t(`shop.orders.${order.status}`) || order.status.charAt(0).toUpperCase() + order.status.slice(1) }}
                                         </span>
                                     </td>
-                                    <td class="px-4 py-2 text-right text-sm font-medium text-gray-900 dark:text-white">
+                                    <td class="table-cell text-right text-sm font-medium text-gray-900 dark:text-white">
                                         {{ formatCurrency(order.total_amount, order.currency_sign, order.currency_code) }}
                                     </td>
-                                    <td class="px-4 py-2">
+                                    <td class="table-cell">
                                         <div class="btn-group" role="group">
                                             <Link
                                                 :href="`${baseUrl}/show/${order.order_number}`"

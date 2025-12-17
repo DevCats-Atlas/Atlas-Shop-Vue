@@ -561,11 +561,11 @@ onMounted(() => {
         <div class="py-6">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-6">
                 <!-- Header -->
-                <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
+                <section class="section">
                     <div class="flex items-start justify-between gap-4">
                         <div>
                             <p class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">{{ t('shop.orders.order') }}</p>
-                            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                            <h1 class="heading-1">
                                 {{ order.order_number }}
                             </h1>
                             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -605,17 +605,17 @@ onMounted(() => {
                     <!-- Main Content -->
                     <div class="lg:col-span-2 space-y-6">
                         <!-- Order Items -->
-                        <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.order_items') }}</h2>
+                        <section class="section">
+                            <h2 class="section-heading">{{ t('shop.orders.order_items') }}</h2>
                             <div class="overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                                     <thead class="bg-gray-50 dark:bg-gray-900/40">
                                         <tr>
-                                            <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.product') }}</th>
-                                            <th class="px-4 py-2 text-left font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.sku') }}</th>
-                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.quantity') }}</th>
-                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.price') }}</th>
-                                            <th class="px-4 py-2 text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.subtotal') }}</th>
+                                            <th class="table-header">{{ t('shop.orders.product') }}</th>
+                                            <th class="table-header">{{ t('shop.orders.sku') }}</th>
+                                            <th class="table-cell text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.quantity') }}</th>
+                                            <th class="table-cell text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.price') }}</th>
+                                            <th class="table-cell text-right font-semibold text-gray-600 dark:text-gray-300">{{ t('shop.orders.subtotal') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -624,7 +624,7 @@ onMounted(() => {
                                             :key="item.id"
                                             class="hover:bg-gray-50 dark:hover:bg-gray-900/40 transition-colors"
                                         >
-                                            <td class="px-4 py-2">
+                                            <td class="table-cell">
                                                 <div class="flex items-center gap-3">
                                                     <img
                                                         v-if="item.product_image"
@@ -645,16 +645,16 @@ onMounted(() => {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="px-4 py-2 text-sm text-gray-900 dark:text-white">
+                                            <td class="table-cell text-sm text-gray-900 dark:text-white">
                                                 {{ item.product_sku || '-' }}
                                             </td>
-                                            <td class="px-4 py-2 text-right text-sm text-gray-900 dark:text-white">
+                                            <td class="table-cell text-right text-sm text-gray-900 dark:text-white">
                                                 {{ item.quantity }}
                                             </td>
-                                            <td class="px-4 py-2 text-right text-sm text-gray-900 dark:text-white">
+                                            <td class="table-cell text-right text-sm text-gray-900 dark:text-white">
                                                 {{ formatCurrency(item.price, order.currency?.left_sign || order.currency?.right_sign, order.currency?.code) }}
                                             </td>
-                                            <td class="px-4 py-2 text-right text-sm font-medium text-gray-900 dark:text-white">
+                                            <td class="table-cell text-right text-sm font-medium text-gray-900 dark:text-white">
                                                 {{ formatCurrency(item.subtotal, order.currency?.left_sign || order.currency?.right_sign, order.currency?.code) }}
                                             </td>
                                         </tr>
@@ -664,8 +664,8 @@ onMounted(() => {
                         </section>
 
                         <!-- Customer Information -->
-                        <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.customer_information') }}</h2>
+                        <section class="section">
+                            <h2 class="section-heading">{{ t('shop.orders.customer_information') }}</h2>
                             <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ t('shop.orders.name') }}</dt>
@@ -695,8 +695,8 @@ onMounted(() => {
                         </section>
 
                         <!-- Delivery & Payment Information -->
-                        <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.delivery_payment') }}</h2>
+                        <section class="section">
+                            <h2 class="section-heading">{{ t('shop.orders.delivery_payment') }}</h2>
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                 <!-- Delivery Method -->
                                 <div>
@@ -849,8 +849,8 @@ onMounted(() => {
                     <!-- Sidebar -->
                     <div class="space-y-6">
                         <!-- Financial Summary -->
-                        <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.financial_summary') }}</h2>
+                        <section class="section">
+                            <h2 class="section-heading">{{ t('shop.orders.financial_summary') }}</h2>
                             <dl class="space-y-3">
                                 <div class="flex justify-between">
                                     <dt class="text-sm text-gray-600 dark:text-gray-400">{{ t('shop.orders.subtotal') }}</dt>
@@ -886,8 +886,8 @@ onMounted(() => {
                         </section>
 
                         <!-- Status History -->
-                        <section class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-4">
-                            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.status_history') }}</h2>
+                        <section class="section">
+                            <h2 class="section-heading">{{ t('shop.orders.status_history') }}</h2>
                             <div class="space-y-4">
                                 <div
                                     v-for="history in statusHistory"
@@ -983,7 +983,7 @@ onMounted(() => {
                     </p>
                 </div>
 
-                <div class="flex items-center justify-end gap-3">
+                <div class="actions-footer">
                     <button type="button" class="btn-text" @click="closeStatusUpdateModal">{{ t('admin.common.cancel') }}</button>
                     <button
                         type="submit"
@@ -1207,7 +1207,7 @@ onMounted(() => {
                                             <div
                                                 v-for="result in citySearchResults[field.name]"
                                                 :key="result.value"
-                                                class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                                                class="table-cell cursor-pointer hover:bg-gray-100"
                                                 @click="selectCityResult(field, result)"
                                             >
                                                 {{ result.label }}
@@ -1297,7 +1297,7 @@ onMounted(() => {
                     </p>
                 </div>
 
-                <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="actions-footer pt-4 border-divider">
                     <button type="button" class="btn-text" @click="closeOrderUpdateModal">{{ t('admin.common.cancel') }}</button>
                     <button
                         type="submit"
