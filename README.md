@@ -284,17 +284,15 @@ The package resources are automatically included when you build your main projec
 npm run build
 ```
 
-## Dependencies
+## Dependencies and Consumer Toolchain
 
-AtlasShop-Vue requires:
+AtlasShop-Vue requires AtlasCMS-Vue for layouts, shared components, translations, and page resolution, plus the AtlasShop backend for page props/routes. Its own npm manifest declares no dependencies, standalone build/test scripts, or Node engine. The consumer installs AtlasCMS-Vue and its Vue/Inertia dependencies explicitly.
 
-- **AtlasCMS-Vue** (required) - For admin panel functionality
-- Node.js 18+
-- npm 9+
-- Vite 5+
-- Laravel Vite Plugin 2+
-- Vue 3+
-- TypeScript 5+ (for TypeScript files)
+Shop admin pages are Vue components using plain JavaScript. TypeScript is used by the separate AtlasShop browser library; it is not a requirement for compiling these admin pages.
+
+The current My Atlas CMS host requires **Node >=22.12.0** and uses Vite `^8.3.4`, `@vitejs/plugin-vue` `^6.0.10`, Laravel Vite plugin `^3.2.0`, and Tailwind Vite plugin `^4.3.3`. Its Laravel Vite plugin requires Vite 8. AtlasCMS-Vue supplies Vue `^3.5.44` and `@inertiajs/vue3` `^3.9.1`. These are the tested consumer versions; this package has no separate Vite/Node minimum in its manifest.
+
+Use npm from the selected compatible Node installation and the consumer lock with `npm ci`. Run `npm run build` from the host root. In My Atlas CMS, `node --test tests/Frontend/*.test.mjs` also verifies packaging and package helpers. A separate consumer must satisfy its selected plugins' Node engines and peer dependencies.
 
 ## Integration with AtlasCMS-Vue
 
