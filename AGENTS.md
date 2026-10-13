@@ -1,0 +1,20 @@
+# AtlasShop-Vue
+
+Independent npm repository: `@devcats-atlas/atlas-shop-vue`. Provides shop admin Inertia pages for orders and baskets. Public demo shop Blade/CSS/JS belongs to AtlasShop.
+
+## Work rules
+
+- Read `README.md` for integration context; actual resources and aliases are defined in `vite.config.mjs`.
+- Use Vue Composition API, `<script setup>`, JavaScript, and existing Inertia form/navigation patterns.
+- Reuse AtlasCMS-Vue layouts/components/helpers through `@admin` and `@`. This package's alias is `@atlasshop/admin`.
+- Match props and status/filter/update routes to AtlasShop controllers and DTOs. Dynamic delivery fields/options use shop API endpoints; retain cascading dependencies and search behavior.
+- Use translation keys from AtlasShop's `resources/lang/{locale}/shop.php` via the shared translation helper. Maintain dark-mode support.
+- Package `resources` in Vite config is empty: pages are discovered by AtlasCMS-Vue, without their own entry point.
+- Verify page discovery against AtlasCMS-Vue's static globs. The Vite utility computes `ATLAS_SHOP_VUE_PATH` for environment overrides.
+- The manifest has no build/test scripts, is private, and its `files` list currently omits `vite.config.mjs`. Confirm packaging before changing consumption outside the local host.
+
+## Verification and Git
+
+Run `npm run build` from the My Atlas CMS host root. For screen changes verify the affected list/detail form, errors, filters, and dynamic delivery fields when a running host is available. A separate clone needs a consumer with AtlasCMS-Vue and AtlasShop backend contracts.
+
+Inspect this repository's Git status separately. Commit/push only on explicit request.
