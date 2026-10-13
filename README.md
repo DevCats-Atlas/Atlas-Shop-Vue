@@ -14,19 +14,19 @@ See [AtlasCMS-Vue README](../AtlasCMS-Vue/README.md) for installation instructio
 
 ## Installation
 
-### Option 1: npm Package (Production)
+The current manifest has `private: true`: [npm refuses to publish it](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private). Supported delivery for this checkout is local source, Git, or an npm archive. A registry release needs a separately prepared publishable manifest and release process.
+
+Run installation commands from the Laravel/Vite consumer root. AtlasCMS-Vue's third-party dependencies still need registry access or a populated npm cache. AtlasShop-Vue also needs AtlasCMS-Vue installed in that consumer.
+
+### Local Sources
+
+In My Atlas CMS, populate the submodules first:
 
 ```bash
-npm install @devcats-atlas/atlas-shop-vue
+git submodule update --init --recursive
 ```
 
-### Option 2: Local Development
-
-```bash
-npm install ./packages/AtlasShop-Vue
-```
-
-Or add to your `package.json`:
+For another consumer, clone the package repositories into the matching `packages/` directories. Then declare the local paths in the consumer's `package.json`:
 
 ```json
 {
@@ -37,17 +37,48 @@ Or add to your `package.json`:
 }
 ```
 
-Then run:
-
 ```bash
 npm install
 ```
 
-### Option 3: Environment Variable (CI/CD)
+### Git Dependency
+
+Use [npm's Git dependency syntax](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#git-urls-as-dependencies), replacing `<commit-sha>` with the full commit SHA of the tested revision:
 
 ```bash
-export ATLASSHOPVUE_PATH=/path/to/atlas-shop-vue
+npm install '@devcats-atlas/atlas-shop-vue@git+https://github.com/DevCats-Atlas/Atlas-Shop-Vue.git#<commit-sha>'
 ```
+
+For AtlasShop-Vue, install AtlasCMS-Vue by the same method or from local sources first. Keep the dependency entries and `package-lock.json` in the consumer repository; with an existing lock, use `npm ci` in CI. The Git URL requires access to the repository. A commit SHA pins the Atlas package; the lock pins resolved third-party dependencies.
+
+### npm Archive
+
+From this package's source directory, create an archive in an existing output directory:
+
+```bash
+npm pack --ignore-scripts --pack-destination /absolute/path/to/artifacts
+```
+
+Use the filename returned by `npm pack` (currently `devcats-atlas-atlas-shop-vue-1.0.0.tgz`). Install it from the consumer root:
+
+```bash
+npm install /absolute/path/to/artifacts/devcats-atlas-atlas-shop-vue-1.0.0.tgz
+```
+
+Keep the archive available at the path recorded in the consumer dependency and lock, including in CI. AtlasShop-Vue consumers need archives or source dependencies for both Vue packages. Packing works with `private: true`; publishing is a separate operation.
+
+### Environment Path Override
+
+After installing and declaring the dependency, export the variable before starting Vite:
+
+```bash
+export ATLAS_SHOP_VUE_PATH=/absolute/path/to/AtlasShop-Vue
+npm run build
+```
+
+`loadAllPackages()` reads this variable from `process.env`; the documented Vite config calls it before `loadEnv()`, so a value only in `.env` is not loaded by that call. Relative overrides resolve from the consumer root. The selected directory must contain `resources/` and a working `vite.config.mjs`.
+
+An override changes config/resource resolution; it does not install dependencies or add a package to discovery. Keep the package declared in `package.json` and AtlasCMS-Vue installed in `node_modules` so `@devcats-atlas/atlas-cms-vue/vite-utils.mjs` can be imported. Override precedence is environment → local `file:` directory → installed `node_modules`. A missing override directory falls back to the remaining locations. Page discovery still follows the static globs in AtlasCMS-Vue's `page-resolver.js`; an arbitrary external directory is not automatically a page source.
 
 ## Vite Configuration
 
@@ -55,11 +86,11 @@ AtlasShop-Vue automatically integrates with your existing Vite configuration. If
 
 ### Automatic Discovery
 
-The `loadAllPackages()` function from AtlasCMS-Vue automatically discovers all `@devcats/*-vue` packages in your `package.json`, including AtlasShop-Vue.
+The `loadAllPackages()` function from AtlasCMS-Vue automatically discovers `@devcats/*-vue` and `@devcats-atlas/*-vue` dependencies in your `package.json`, including AtlasShop-Vue.
 
 ### Step 1: Ensure Both Packages are in `package.json`
 
-Make sure both packages are listed in your `package.json` dependencies:
+Keep both packages listed in the consumer dependencies. For local sources use the example below; retain the Git or archive specs if you chose those installation methods:
 
 ```json
 {
@@ -106,10 +137,10 @@ export default defineConfig(({ mode }) => {
 
 ## How It Works
 
-1. **Automatic Discovery**: The `loadAllPackages()` function reads your `package.json` and finds all `@devcats/*-vue` packages, including AtlasShop-Vue.
+1. **Automatic Discovery**: The `loadAllPackages()` function reads your `package.json` and finds `@devcats/*-vue` and `@devcats-atlas/*-vue` dependencies, including AtlasShop-Vue.
 
 2. **Package Resolution**: AtlasShop-Vue is resolved using this priority:
-   - Environment variable (`ATLASSHOPVUE_PATH`)
+   - Environment variable (`ATLAS_SHOP_VUE_PATH`)
    - Path from `package.json` (for `file:` protocol)
    - npm package in `node_modules`
 
@@ -200,7 +231,7 @@ If you see an error that AtlasShop-Vue is not found:
 2. **Check AtlasCMS-Vue**: Verify AtlasCMS-Vue is installed first (required)
 3. **Run `npm install`**: Make sure dependencies are installed
 4. **Check path**: If using `file:` protocol, verify the path is correct
-5. **Environment variable**: You can override the path with `ATLASSHOPVUE_PATH`
+5. **Environment variable**: You can override the path with `ATLAS_SHOP_VUE_PATH`
 
 ### Resources Not Loading
 
