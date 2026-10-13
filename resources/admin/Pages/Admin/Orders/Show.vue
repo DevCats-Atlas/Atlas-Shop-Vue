@@ -1,4 +1,5 @@
 <script setup>
+import { adminUrl } from '@/utils/adminUrl';
 import { computed, nextTick, onMounted, ref } from 'vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import AdminLayout from '@admin/Layouts/AdminLayout.vue';
@@ -61,7 +62,7 @@ const props = defineProps({
 
 const { showToast } = useToast();
 
-const baseUrl = computed(() => `/admin/${props.moduleHandle}`);
+const baseUrl = computed(() => adminUrl(`${props.moduleHandle}`));
 const indexUrl = computed(() => `${baseUrl.value}/index`);
 
 // Status update modal

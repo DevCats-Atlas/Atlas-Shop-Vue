@@ -13,6 +13,8 @@ Independent npm repository: `@devcats-atlas/atlas-shop-vue`. Provides shop admin
 - Verify page discovery against AtlasCMS-Vue's static globs. The Vite utility computes `ATLAS_SHOP_VUE_PATH` for environment overrides.
 - The manifest has no build/test scripts, is private, and its `files` list currently omits `vite.config.mjs`. Confirm packaging before changing consumption outside the local host.
 
+Admin URLs use `adminUrl()` from `@/utils/adminUrl`, backed by the shared Inertia `adminPrefix` prop. Pass paths relative to the admin prefix. Use `adminModuleHandle()` for module extraction; do not hardcode `/admin` in links, form endpoints, or path parsing.
+
 ## Verification and Git
 
 Run `npm run build` from the My Atlas CMS host root. For screen changes verify the affected list/detail form, errors, filters, and dynamic delivery fields when a running host is available. A separate clone needs a consumer with AtlasCMS-Vue and AtlasShop backend contracts.
