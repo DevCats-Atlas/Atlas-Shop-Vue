@@ -11,7 +11,7 @@ Independent npm repository: `@devcats-atlas/atlas-shop-vue`. Provides shop admin
 - Use translation keys from AtlasShop's `resources/lang/{locale}/shop.php` via the shared translation helper. Maintain dark-mode support.
 - Package `resources` in Vite config is empty: pages are discovered by AtlasCMS-Vue, without their own entry point.
 - Verify page discovery against AtlasCMS-Vue's static globs. The Vite utility computes `ATLAS_SHOP_VUE_PATH` for environment overrides.
-- The manifest has no build/test scripts, is private, and its `files` list currently omits `vite.config.mjs`. Confirm packaging before changing consumption outside the local host.
+- For packaging changes, verify `npm pack --dry-run --ignore-scripts --json` includes `vite.config.mjs` and admin pages, then install the tarball in a clean consumer and check `loadAllPackages()` resolves `@atlasshop/admin` inside the installed package.
 
 Admin URLs use `adminUrl()` from `@/utils/adminUrl`, backed by the shared Inertia `adminPrefix` prop. Pass paths relative to the admin prefix. Use `adminModuleHandle()` for module extraction; do not hardcode `/admin` in links, form endpoints, or path parsing.
 

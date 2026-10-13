@@ -121,6 +121,16 @@ export default defineConfig(({ mode }) => {
 
 ## Package Structure
 
+The npm archive includes `vite.config.mjs` and `resources/**/*`. The config is required for `loadAllPackages()` to register `@atlasshop/admin` when consuming an archive or Git dependency.
+
+To inspect the archive contents, run from this package directory:
+
+```bash
+npm pack --dry-run --ignore-scripts --json
+```
+
+In the My Atlas CMS integration host, `node --test tests/Frontend/packagePackaging.test.mjs` also packs and installs the archive in a temporary consumer and verifies config loading. These checks work locally without registry access.
+
 ```
 AtlasShop-Vue/
 ├── vite.config.mjs          # Package Vite configuration
