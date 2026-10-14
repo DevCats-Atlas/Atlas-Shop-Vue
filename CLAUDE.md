@@ -95,4 +95,4 @@ statusForm.put(`/admin/module/orders/${order.id}/status`, { onSuccess: () => mod
 ```
 
 **Page auto-discovery:**
-With `atlasPages()` in the consumer Vite config, `resources/admin/Pages/Admin/Orders/Index.vue` in the selected shop directory resolves `Admin/Orders/Index`. Host pages can override it by the same relative name. Read [AtlasCMS-Vue Page Resolution](../AtlasCMS-Vue/README.md#page-resolution) before changing discovery or collisions.
+With `atlasPages()` in the consumer Vite config, `resources/admin/Pages/Admin/Orders/Index.vue` in the selected shop directory resolves `Admin/Orders/Index`. Host pages can override it by the same relative name. Read [AtlasCMS-Vue Page Resolution](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md#page-resolution) before changing discovery or collisions.

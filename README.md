@@ -2,7 +2,7 @@
 
 Vue.js admin panel package for AtlasShop e-commerce functionality. Provides Vue components and Inertia.js pages for the admin interface (orders, baskets management).
 
-**Note:** Frontend demo resources (JavaScript/CSS) are located in the [AtlasShop](../AtlasShop/README.md) package, not in this package.
+**Note:** Frontend demo resources (JavaScript/CSS) are located in the [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md) package, not in this package.
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ Vue.js admin panel package for AtlasShop e-commerce functionality. Provides Vue 
 
 Make sure you have installed and configured AtlasCMS-Vue before proceeding with AtlasShop-Vue installation.
 
-See [AtlasCMS-Vue README](../AtlasCMS-Vue/README.md) for installation instructions.
+See [AtlasCMS-Vue README](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md) for installation instructions.
 
 ## Installation
 
@@ -161,7 +161,7 @@ AtlasShop-Vue resources/aliases and admin page roots now use the same selected p
    - Path aliases for admin component imports
    - (No frontend resources - they're in the AtlasShop package)
 
-4. **Page Integration**: Pass the returned `pageRoots` to `atlasPages()` to register the selected package's Inertia pages. Host `resources/admin/Pages/` wins, followed by CMS pages and other declared Vue dependencies. See [AtlasCMS-Vue page resolution](../AtlasCMS-Vue/README.md#page-resolution) for collisions and explicit Composer roots.
+4. **Page Integration**: Pass the returned `pageRoots` to `atlasPages()` to register the selected package's Inertia pages. Host `resources/admin/Pages/` wins, followed by CMS pages and other declared Vue dependencies. See [AtlasCMS-Vue page resolution](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md#page-resolution) for collisions and explicit Composer roots.
 
 ## Package Structure
 
@@ -184,7 +184,7 @@ AtlasShop-Vue/
 └── package.json
 ```
 
-**Note:** Frontend demo resources (JavaScript/CSS) are in the [AtlasShop](../AtlasShop/README.md) package at `packages/AtlasShop/resources/js/` and `packages/AtlasShop/resources/css/`.
+**Note:** Frontend demo resources (JavaScript/CSS) are in the [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md) package at `packages/AtlasShop/resources/js/` and `packages/AtlasShop/resources/css/`.
 
 ## Available Aliases
 
@@ -224,7 +224,7 @@ export default {
 };
 ```
 
-**Note:** Frontend demo resources (JavaScript/CSS) are configured in the [AtlasShop](../AtlasShop/README.md) package, not here.
+**Note:** Frontend demo resources (JavaScript/CSS) are configured in the [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md) package, not here.
 
 ## Features
 
@@ -232,7 +232,7 @@ export default {
 - **Inertia.js Integration**: Seamless integration with Laravel backend
 - **Vue 3 Components**: Modern Vue.js components for admin interface
 
-**Note:** Frontend demo shop functionality (JavaScript library, CSS) is provided by the [AtlasShop](../AtlasShop/README.md) package.
+**Note:** Frontend demo shop functionality (JavaScript library, CSS) is provided by the [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md) package.
 
 ## Troubleshooting
 
@@ -253,7 +253,7 @@ If admin pages aren't loading:
 1. **Check `vite.config.mjs`**: Ensure the package has a valid `vite.config.mjs` file
 2. **Check Vite build**: Run `npm run dev` and check for errors in the console
 3. **Verify AtlasCMS-Vue**: Ensure AtlasCMS-Vue is properly installed and configured
-4. **Frontend resources**: If you need frontend shop resources (JS/CSS), they're in the [AtlasShop](../AtlasShop/README.md) package
+4. **Frontend resources**: If you need frontend shop resources (JS/CSS), they're in the [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md) package
 
 ### Aliases Not Working
 
@@ -318,15 +318,15 @@ AtlasShop-Vue is designed to work seamlessly with AtlasCMS-Vue:
 
 ## License
 
-[Your License Here]
+This private package declares no license in `package.json` and ships no LICENSE file. Its license terms are unspecified by the repository metadata.
 
 ## Support
 
-For issues and questions, please [create an issue](https://github.com/your-org/atlas-shop-vue/issues).
+For support and source context, see [the package repository](https://github.com/DevCats-Atlas/Atlas-Shop-Vue).
 
 ## Related Packages
 
-- [AtlasCMS-Vue](../AtlasCMS-Vue/README.md) - Required dependency
-- [AtlasShop](../AtlasShop/README.md) - Backend PHP package
-- [AtlasCMS](../AtlasCMS/README.md) - CMS backend package
+- [AtlasCMS-Vue](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md) - Required dependency
+- [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md) - Backend PHP package
+- [AtlasCMS](https://github.com/DevCats-Atlas/Atlas-CMS/blob/main/README.md) - CMS backend package
 
