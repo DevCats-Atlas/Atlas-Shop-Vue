@@ -95,4 +95,4 @@ statusForm.put(`/admin/module/orders/${order.id}/status`, { onSuccess: () => mod
 ```
 
 **Page auto-discovery:**
-Pages at `Pages/Admin/Orders/Index.vue` are automatically resolved for the `orders` module by AtlasCMS-Vue's page resolver — no manual route registration needed.
+With `atlasPages()` in the consumer Vite config, `resources/admin/Pages/Admin/Orders/Index.vue` in the selected shop directory resolves `Admin/Orders/Index`. Host pages can override it by the same relative name. Read [AtlasCMS-Vue Page Resolution](../AtlasCMS-Vue/README.md#page-resolution) before changing discovery or collisions.

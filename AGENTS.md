@@ -10,7 +10,7 @@ Independent npm repository: `@devcats-atlas/atlas-shop-vue`. Provides shop admin
 - Match props and status/filter/update routes to AtlasShop controllers and DTOs. Dynamic delivery fields/options use shop API endpoints; retain cascading dependencies and search behavior.
 - Use translation keys from AtlasShop's `resources/lang/{locale}/shop.php` via the shared translation helper. Maintain dark-mode support.
 - Package `resources` in Vite config is empty: pages are discovered by AtlasCMS-Vue, without their own entry point.
-- Verify page discovery against AtlasCMS-Vue's static globs. The Vite utility computes `ATLAS_SHOP_VUE_PATH` for environment overrides.
+- Pass `loadAllPackages()` pageRoots into the consumer's `atlasPages()` plugin. Pages must use the selected shop directory, including `ATLAS_SHOP_VUE_PATH` overrides; verify host overrides and exact Inertia names against the CMS registry contract.
 - For packaging changes, verify `npm pack --dry-run --ignore-scripts --json` includes `vite.config.mjs` and admin pages, then install the tarball in a clean consumer and check `loadAllPackages()` resolves `@atlasshop/admin` inside the installed package.
 
 Admin URLs use `adminUrl()` from `@/utils/adminUrl`, backed by the shared Inertia `adminPrefix` prop. Pass paths relative to the admin prefix. Use `adminModuleHandle()` for module extraction; do not hardcode `/admin` in links, form endpoints, or path parsing.

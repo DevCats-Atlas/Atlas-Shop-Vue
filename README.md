@@ -78,7 +78,7 @@ npm run build
 
 `loadAllPackages()` reads this variable from `process.env`; the documented Vite config calls it before `loadEnv()`, so a value only in `.env` is not loaded by that call. Relative overrides resolve from the consumer root. The selected directory must contain `resources/` and a working `vite.config.mjs`.
 
-An override changes config/resource resolution; it does not install dependencies or add a package to discovery. Keep the package declared in `package.json` and AtlasCMS-Vue installed in `node_modules` so `@devcats-atlas/atlas-cms-vue/vite-utils.mjs` can be imported. Override precedence is environment → local `file:` directory → installed `node_modules`. A missing override directory falls back to the remaining locations. Page discovery still follows the static globs in AtlasCMS-Vue's `page-resolver.js`; an arbitrary external directory is not automatically a page source.
+An override changes config/resource/page resolution; it does not install dependencies or add a package to discovery. Keep the package declared in `package.json` and AtlasCMS-Vue installed in `node_modules` so `@devcats-atlas/atlas-cms-vue/vite-utils.mjs` can be imported. Override precedence is environment → local `file:` directory → installed `node_modules`. A missing override directory falls back to the remaining locations. With the `atlasPages()` plugin below, pages are loaded from the selected package's `resources/admin/Pages/`, including external override directories.
 
 ## Vite Configuration
 
@@ -115,7 +115,7 @@ import path from 'path';
 
 // Import AtlasCMS-Vue utilities (handles all @devcats/*-vue packages)
 const utils = await import('@devcats-atlas/atlas-cms-vue/vite-utils.mjs');
-const { loadAllPackages } = utils;
+const { loadAllPackages, atlasPages } = utils;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -126,14 +126,27 @@ const parsePort = (value, fallback) => {
 
 // Load all packages automatically from package.json
 // This will discover both AtlasCMS-Vue and AtlasShop-Vue
-const { inputs, aliases } = await loadAllPackages(__dirname);
+const { inputs, aliases, pageRoots } = await loadAllPackages(__dirname);
 
 export default defineConfig(({ mode }) => {
-    // ... rest of your config
+    const env = loadEnv(mode, process.cwd(), '');
+    return {
+        plugins: [
+            atlasPages({ projectRoot: __dirname, pageRoots }),
+            laravel({ input: inputs, refresh: true }),
+            vue(),
+            tailwindcss(),
+        ],
+        resolve: { alias: aliases },
+        server: {
+            host: env.VITE_DEV_HOST || 'localhost',
+            port: parsePort(env.VITE_DEV_PORT, 5174),
+        },
+    };
 });
 ```
 
-**That's it!** AtlasShop-Vue will be automatically discovered and loaded.
+AtlasShop-Vue resources/aliases and admin page roots now use the same selected package directory. Keep the `atlasPages()` plugin registered in both build and dev.
 
 ## How It Works
 
@@ -148,7 +161,7 @@ export default defineConfig(({ mode }) => {
    - Path aliases for admin component imports
    - (No frontend resources - they're in the AtlasShop package)
 
-4. **Automatic Integration**: All resources and aliases are automatically added to your Vite configuration.
+4. **Page Integration**: Pass the returned `pageRoots` to `atlasPages()` to register the selected package's Inertia pages. Host `resources/admin/Pages/` wins, followed by CMS pages and other declared Vue dependencies. See [AtlasCMS-Vue page resolution](../AtlasCMS-Vue/README.md#page-resolution) for collisions and explicit Composer roots.
 
 ## Package Structure
 
@@ -256,7 +269,7 @@ If aliases aren't resolving:
 If admin pages (Orders, Baskets) are not found:
 
 1. **Check page-resolver.js**: Verify the page resolver in AtlasCMS-Vue can find AtlasShop-Vue pages
-2. **Verify package discovery**: Ensure AtlasShop-Vue is being discovered by `loadAllPackages()`
+2. **Verify page registration**: Ensure `loadAllPackages()` returns the selected shop page root and `atlasPages({ projectRoot: __dirname, pageRoots })` is in the consumer Vite plugins
 3. **Check file structure**: Verify admin pages exist in `resources/admin/Pages/`
 
 ## Development
