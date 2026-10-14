@@ -17,6 +17,6 @@ Admin URLs use `adminUrl()` from `@/utils/adminUrl`, backed by the shared Inerti
 
 ## Verification and Git
 
-Run `npm run build` from the My Atlas CMS host root. For screen changes verify the affected list/detail form, errors, filters, and dynamic delivery fields when a running host is available. A separate clone needs a consumer with AtlasCMS-Vue and AtlasShop backend contracts.
+Run `npm run build` from the Atlas CMS host root. For screen changes verify the affected list/detail form, errors, filters, and dynamic delivery fields when a running host is available. A separate clone needs a consumer with AtlasCMS-Vue and AtlasShop backend contracts.
 
 Inspect this repository's Git status separately. Commit/push only on explicit request.
