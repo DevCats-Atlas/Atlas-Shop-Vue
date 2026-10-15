@@ -23,7 +23,7 @@ Inspect this repository's Git status separately. Commit/push only on explicit re
 
 ## Reference
 
-Installation and Vite integration: [README.md](README.md). Frontend-only: no PHP, no build step; pages are discovered by the AtlasCMS-Vue registry (`@atlasshop/admin` alias). The demo shop belongs to AtlasShop.
+Installation and integration: [README.md](README.md); installation methods and page resolution are documented in AtlasCMS-Vue. Frontend-only: no PHP, no build step; pages are discovered by the AtlasCMS-Vue registry (`@atlasshop/admin` alias). The demo shop belongs to AtlasShop.
 
 | Page | Contents |
 | --- | --- |
