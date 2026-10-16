@@ -34,7 +34,7 @@ const currentItemId = computed(() => {
     if (pageProps?.item?.id) {
         return parseInt(pageProps.item.id, 10);
     }
-    
+
     // Fall back to URL query parameter (for regular modules)
     const url = new URL(window.location.href);
     const itemParam = url.searchParams.get('item');
@@ -79,7 +79,7 @@ const fetchProductAttributes = async () => {
         if (isMounted.value) {
             categoriesData.value = data.categories || [];
             selectedAttributes.value = data.selectedAttributes || [];
-            
+
             // Set active tab to first category if available
             if (categoriesData.value.length > 0 && !activeTab.value) {
                 activeTab.value = categoriesData.value[0].id;
@@ -138,7 +138,7 @@ const toggleAttribute = async (attributeId) => {
         }
 
         const data = await response.json();
-        
+
         // Update local state
         if (newSelected) {
             if (!selectedAttributes.value.includes(attributeId)) {
@@ -224,17 +224,17 @@ onBeforeUnmount(() => {
 
                     <div v-else v-for="group in category.groups" :key="group.id" class="space-y-3">
                         <h4 class="text-sm font-semibold text-gray-900 dark:text-white">{{ group.title }}</h4>
-                        
+
                         <div v-if="group.attributes.length === 0" class="text-xs text-gray-400 dark:text-gray-500 pl-4">
                             {{ t('shop.product_attributes.no_attributes') }}
                         </div>
-                        
+
                         <div v-else class="grid grid-cols-1 gap-3 ">
                             <label
                                 v-for="attribute in group.attributes"
                                 :key="attribute.id"
                                 class="inline-flex items-center space-x-2 cursor-pointer p-2 rounded border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"
-                                :class="{ 
+                                :class="{
                                     'opacity-50': toggling[attribute.id],
                                     'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-300 dark:border-indigo-700': isAttributeSelected(attribute.id)
                                 }"
