@@ -1,12 +1,14 @@
 # AtlasShop-Vue
 
-Admin Inertia pages for AtlasShop: orders and baskets. The pages run inside the AtlasCMS-Vue admin (layout, components, translations, page resolution); the backend controllers and the public demo shop belong to [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md).
+Admin Inertia pages for AtlasShop: orders and baskets, plus the product attributes custom interface. The pages run inside the AtlasCMS-Vue admin (layout, components, translations, page resolution); the backend controllers and the public demo shop belong to [AtlasShop](https://github.com/DevCats-Atlas/Atlas-Shop/blob/main/README.md).
 
 | Page | Contents |
 | --- | --- |
 | `Admin/Orders/Index` | Search by number, customer or email; status and date filters; sortable, paginated list |
 | `Admin/Orders/Show` | Customer, item snapshots, status timeline and status change, editable delivery data with dynamic fields from `/api/shop`, payment transaction details |
 | `Admin/Baskets/Index` | Guest and user baskets with expandable items, date filter, sorting |
+
+Product fields use `type: custom` and `interface_path: Shop/ProductAttributes`. The interface is discovered from `resources/admin/Custom/Interfaces/Shop/ProductAttributes.vue` and uses AtlasShop's module-scoped attribute routes.
 
 ## Requirements
 

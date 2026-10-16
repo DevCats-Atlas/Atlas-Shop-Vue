@@ -1,6 +1,6 @@
 # AtlasShop-Vue
 
-Independent npm repository: `@devcats-atlas/atlas-shop-vue`. Provides shop admin Inertia pages for orders and baskets. Public demo shop Blade/CSS/JS belongs to AtlasShop.
+Independent npm repository: `@devcats-atlas/atlas-shop-vue`. Provides shop admin Inertia pages for orders and baskets. The `Shop/ProductAttributes` custom interface also belongs here; its field configuration is seeded by AtlasShop. Public demo shop Blade/CSS/JS belongs to AtlasShop.
 
 ## Work rules
 
