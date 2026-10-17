@@ -20,16 +20,3 @@ Admin URLs use `adminUrl()` from `@/utils/adminUrl`, backed by the shared Inerti
 Run `npm run build` from the Atlas CMS host root. For screen changes verify the affected list/detail form, errors, filters, and dynamic delivery fields when a running host is available. A separate clone needs a consumer with AtlasCMS-Vue and AtlasShop backend contracts.
 
 Inspect this repository's Git status separately. Commit/push only on explicit request.
-
-## Reference
-
-Installation and integration: [README.md](README.md); installation methods and page resolution are documented in AtlasCMS-Vue. Frontend-only: no PHP, no build step; pages are discovered by the AtlasCMS-Vue registry (`@atlasshop/admin` alias). The demo shop belongs to AtlasShop.
-
-| Page | Contents |
-| --- | --- |
-| `Admin/Orders/Index` | Search (number, customer, email), status and date filters, sortable columns, paginated with preserved filters |
-| `Admin/Orders/Show` | Customer, item snapshots, status timeline and modal updates, editable delivery data with dynamic fields from `/api/shop/` (cascading region → city → point, city search), payment transaction details |
-| `Admin/Baskets/Index` | Guest and user baskets with expandable items, date filter, sorting |
-
-- Uses AtlasCMS-Vue `AdminLayout`, `ModalDialog`, `useTranslation`, `useToast`; translation keys `shop.orders.*`, `shop.baskets.*`.
-- Pages receive the module props (`title`, `moduleHandle`, `module`, `action`, `menuItem`) plus page data. Build admin URLs with AtlasCMS-Vue `adminUrl()`.
