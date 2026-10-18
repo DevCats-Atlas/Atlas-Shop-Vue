@@ -524,7 +524,7 @@ const calculateTotal = () => {
     const taxAmount = parseFloat(orderUpdateForm.tax_amount) || 0;
     const shippingAmount = parseFloat(orderUpdateForm.shipping_amount) || 0;
     const discountAmount = parseFloat(orderUpdateForm.discount_amount) || 0;
-    orderUpdateForm.total_amount = Math.max(0, subtotal + taxAmount + shippingAmount - discountAmount);
+    orderUpdateForm.total_amount = Math.round((subtotal + taxAmount + shippingAmount - discountAmount) * 100) / 100;
 };
 
 // Status badge color
@@ -1058,8 +1058,11 @@ onMounted(() => {
                 </div>
 
                 <!-- Financial Information -->
-                <div class="space-y-4">
+                <fieldset :disabled="!order.financial.editable" class="space-y-4">
                     <h3 class="text-sm font-semibold text-gray-900 dark:text-white">{{ t('shop.orders.financial_information') }}</h3>
+                    <p v-if="!order.financial.editable" class="text-sm text-gray-600 dark:text-gray-300">
+                        {{ t('shop.orders.financials_locked') }}
+                    </p>
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
                             <label class="form-label">{{ t('shop.orders.subtotal') }}</label>
@@ -1138,7 +1141,7 @@ onMounted(() => {
                             </p>
                         </div>
                     </div>
-                </div>
+                </fieldset>
 
                 <!-- Delivery and Payment Methods -->
                 <div class="space-y-4">
@@ -1264,6 +1267,7 @@ onMounted(() => {
                             <label class="form-label">{{ t('shop.orders.payment_method') }}</label>
                             <select
                                 v-model.number="orderUpdateForm.payment_method_id"
+                                :disabled="!order.financial.editable"
                                 class="form-select"
                                 :class="{ 'form-input-error': orderUpdateForm.errors.payment_method_id }"
                             >

@@ -10,6 +10,12 @@ Admin Inertia pages for AtlasShop: orders and baskets, plus the product attribut
 
 Product fields use `type: custom` and `interface_path: Shop/ProductAttributes`. The interface is discovered from `resources/admin/Custom/Interfaces/Shop/ProductAttributes.vue` and uses AtlasShop's module-scoped attribute routes.
 
+The order page uses `order.financial.editable` from AtlasShop to enable amount and payment-method fields. Any payment transaction, a non-pending status or a `paying`/`unknown` checkout state locks them; customer details and notes remain editable. Validation errors come from the backend, including excessive discounts.
+
+## Documentation
+
+[Page contracts](docs/pages.md): every page and its props, nested DTO shapes, routes, filters, status/edit forms, financial locks, dynamic delivery fields and the product attributes interface.
+
 ## Requirements
 
 AtlasCMS-Vue installed in the same consumer, and the AtlasShop backend (its `orders`/`baskets` modules and `/api/shop` routes). The package has no dependencies, build scripts or Node engine of its own; the consumer's Vite toolchain builds the pages — see [AtlasCMS-Vue requirements](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md#requirements).
