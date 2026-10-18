@@ -16,7 +16,7 @@ AtlasCMS-Vue installed in the same consumer, and the AtlasShop backend (its `ord
 
 ## Installation
 
-Install it the same way as AtlasCMS-Vue — local `file:` source, Git dependency pinned to a commit, or an `npm pack` archive; the manifest is `private`, so there is no registry release. See [AtlasCMS-Vue installation](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md#installation). Both packages must be listed in the consumer `package.json`:
+Install it the same way as AtlasCMS-Vue — Git release tag, local `file:` source or an `npm pack` archive; the manifest is `private`, so there is no registry release. See [AtlasCMS-Vue installation](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md#installation). Both packages must be listed in the consumer `package.json`:
 
 ```json
 {
