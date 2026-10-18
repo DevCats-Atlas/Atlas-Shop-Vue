@@ -29,7 +29,7 @@ Install it the same way as AtlasCMS-Vue — Git release tag, local `file:` sourc
 
 No extra Vite configuration is needed: AtlasCMS-Vue's `loadAllPackages()` discovers `@devcats-atlas/*-vue` dependencies, loads this package's `vite.config.mjs` (alias `@atlasshop/admin` → `resources/admin`, no entry points) and returns its page root, which the consumer passes to `atlasPages()`. Resolution order: `ATLAS_SHOP_VUE_PATH` (exported before Vite starts) → `file:` path → `node_modules`.
 
-Host pages in `resources/admin/Pages/` override package pages with the same Inertia name — see [AtlasCMS-Vue page resolution](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/README.md#page-resolution).
+Host pages in `resources/admin/Pages/` override package pages with the same Inertia name — see [AtlasCMS-Vue page resolution](https://github.com/DevCats-Atlas/Atlas-CMS-Vue/blob/main/docs/pages.md#page-resolution).
 
 ## Development
 
